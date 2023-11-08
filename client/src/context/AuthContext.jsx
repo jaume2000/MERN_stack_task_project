@@ -56,8 +56,8 @@ export const AuthProvider = ({children}) => {
         }
     }, [errors])
 
+    //Este efecto se ejecuta después de crear el componente y de resetear el estado.
     useEffect(()=>{
-
         async function checkLogin () {
             const cookies = Cookies.get()
 

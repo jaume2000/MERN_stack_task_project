@@ -6,6 +6,7 @@ export const getTasks = async (req,res) => {
         user: req.user.id
     }).populate("user")   //el populate indica que busquemos el documento al que hace referencia
     // este object id e insertemos los datos ahí directamente.
+    console.log(tasks)
     res.json(tasks)
 }
 
