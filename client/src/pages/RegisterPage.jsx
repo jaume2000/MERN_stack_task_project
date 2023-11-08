@@ -12,7 +12,7 @@ function RegisterPage() {
 
     useEffect(()=>{
         if(isAuthenticated){
-            navigate("/task")
+            navigate("/tasks")
             console.log("user is authenticated")
         }
     },[isAuthenticated])

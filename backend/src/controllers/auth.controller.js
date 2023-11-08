@@ -1,6 +1,8 @@
 import User from '../models/user.model.js'
 import bcrypt from 'bcryptjs'
 import {createAccessToken} from '../libs/jwt.js'
+import jwt from 'jsonwebtoken'
+import { TOKEN_SECRET } from '../config.js'
 
 export const register = async (req,res) => {
     const {username, password, email} = req.body
@@ -91,6 +93,26 @@ export const logout = async (req,res) => {
     return res.send(200)
 }
 
+//Este método le servirá al front para saber si la cookie es valida.
+export const verifyToken = async (req,res) => {
+    const {token} = req.cookies
+    if (!token) return res.status(401).json(["Unauthorized"])
+
+    jwt.verify(token, TOKEN_SECRET, async (err, user) =>{
+        if(err) return res.status(401).json(["Unauthorized"])
+
+        const userFound = await User.findById(user.id)
+        if(!userFound) return res.status(401).json(["Unauthorized"])
+
+        return res.json({
+            id: userFound.id,
+            username: userFound.username,
+            email: userFound.email,
+            createdAt: userFound.createdAt,
+            updatedAt: userFound.updatedAt
+        })
+    })
+}
 
 //Ruta protegida por el login!
 export const profile = async (req, res) => {
