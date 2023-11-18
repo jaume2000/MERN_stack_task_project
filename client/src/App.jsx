@@ -8,12 +8,15 @@ import TasksPage from './pages/TasksPage'
 import ProfilePage from "./pages/ProfilePage"
 import ProtectedRout from "./components/ProtectedRout"
 import TaskProvider from './context/TaskContext'
+import Navbar from "./components/Navbar"
 
 function App(){
   return (
   <AuthProvider>
     <TaskProvider>
       <BrowserRouter>
+      <main className="container mx-auto px-10">
+        <Navbar/>
         <Routes>
           /* Rutas públicas */
           <Route path='/' element={<h1>{<HomePage/>}</h1>}/>
@@ -27,6 +30,7 @@ function App(){
             <Route path='/profile' element={<h1><ProfilePage/></h1>}/>
           </Route>
         </Routes>
+      </main>
       </BrowserRouter>
     </TaskProvider>
   </AuthProvider>

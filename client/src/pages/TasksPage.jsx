@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useTasks } from '../context/TaskContext'
+import TaskCard from '../components/TaskCard'
 
 function TasksPage() {
 
@@ -12,15 +13,8 @@ function TasksPage() {
   return (
     <div>
       <div>TasksPages</div>
-      <div className='flex flex-col items-center'>
-        {tasks.map((task,i) => {
-          return (
-          <div key={task._id} className='max-w-md w-full bg-zinc-800 p-5 m-4 max-w-screen-sm rounded-md'>
-            <h1 className='text-center text-2xl'>{task.title}</h1>
-            <p className='bg-zinc-700 p-2 rounded-md mt-5'>{task.description}</p>
-          </div>
-          )
-        })}
+      <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-5'>
+        {tasks.map((task,i) => <TaskCard key={task._id} task={task}/>)}
       </div>
     </div>
 
